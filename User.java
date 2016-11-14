@@ -31,6 +31,13 @@ public class User extends TwitterUser implements Observer, Subject {
 		}
 	}
 	/**
+	* get the group
+	*/ 
+	public UserGroup getGroup(){
+		return group; 
+	}
+
+	/**
 	 * tweet the message 
 	 */
 	public void tweet(String m ){
