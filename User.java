@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 
+@SuppressWarnings("serial")
 public class User extends TwitterUser implements Observer, Subject {
     // all users have an id, a list of followers and following, and a list of newsfeed
     private String id;
@@ -10,6 +11,7 @@ public class User extends TwitterUser implements Observer, Subject {
     private boolean updatedFeed=false;
     private String message;
     private UserGroup group;
+    
     /**
      * Constructor
      */
@@ -17,6 +19,7 @@ public class User extends TwitterUser implements Observer, Subject {
         setID(id);
         updatedFeed=false;
         group=null;
+        
         
     }
     /**

@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.ArrayList; 
 /**
  * This class uses the Visitor programming type to define a method to go
  * through user's messages and count the number of positive messages
