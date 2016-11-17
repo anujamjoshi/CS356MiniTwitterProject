@@ -1,13 +1,13 @@
-import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 
 @SuppressWarnings("serial")
 public class User extends TwitterUser implements Observer, Subject {
     // all users have an id, a list of followers and following, and a list of newsfeed
     private String id;
-    private ArrayList<Observer> followers = new ArrayList<>();
-    private ArrayList <Subject> following = new ArrayList<>();
-    private ArrayList <String> newsfeed = new ArrayList<>();
+    private DefaultListModel<Observer> followers = new DefaultListModel<>();
+    private DefaultListModel <Subject> following = new DefaultListModel<>();
+    private DefaultListModel <String> newsfeed = new DefaultListModel<>();
     private boolean updatedFeed=false;
     private String message;
     private UserGroup group;
@@ -42,20 +42,20 @@ public class User extends TwitterUser implements Observer, Subject {
     public void tweet(String m ){
         this.message= m;
         updatedFeed=true;
-        newsfeed.add("-me: "+message); // adds to own newsfeed
+        newsfeed.addElement("-me: "+message); // adds to own newsfeed
         notifyObservers();// tell observers to update newsfeed themselves
     }
     /**
      * @return the followers
      */
-    public ArrayList<Observer> getFollowers() {
+    public DefaultListModel<Observer> getFollowers() {
         return followers;
     }
     
     /**
      * @return the following
      */
-    public ArrayList<Subject> getFollowing() {
+    public DefaultListModel<Subject> getFollowing() {
         return following;
     }
     
@@ -63,7 +63,7 @@ public class User extends TwitterUser implements Observer, Subject {
     /**
      * @return the newsfeed
      */
-    public ArrayList<String> getNewsfeed() {
+    public DefaultListModel<String> getNewsfeed() {
         return newsfeed;
     }
     /**
@@ -100,7 +100,7 @@ public class User extends TwitterUser implements Observer, Subject {
      */
     @Override
     public void setSubject(Subject s) {
-        following.add(s);
+        following.addElement(s);
         
     }
     /**
@@ -109,7 +109,7 @@ public class User extends TwitterUser implements Observer, Subject {
     @Override
     public void update(Subject s) {
         String update = getUpdate(this);
-        newsfeed.add("-"+s.toString()+": "+update);
+        newsfeed.addElement("-"+s.toString()+": "+update);
         
     }
     
@@ -118,7 +118,7 @@ public class User extends TwitterUser implements Observer, Subject {
      */
     @Override
     public void setObserver(Observer o) {
-        followers.add(o);
+        followers.addElement(o);
         
     }
     
@@ -130,9 +130,9 @@ public class User extends TwitterUser implements Observer, Subject {
          */
         if(updatedFeed){
             updatedFeed=false;
-            for (Subject o: following){
+            for (Object o: following.toArray()){
                 // for each observer get the message to update and add it to the respective newsfeed. 
-                update(o);
+                update((Subject) o);
             }
             
         }

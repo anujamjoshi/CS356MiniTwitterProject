@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
 /**
  * This class uses the Visitor programming type to define a method to go
  * through user's messages and count the number of positive messages
@@ -30,9 +32,9 @@ public class PositiveMessages implements Visitor {
     @Override
     public void visit(TwitterUser u) {
         if (u instanceof User){
-            ArrayList<String> news =((User) u).getNewsfeed();
-            for (String s: news){
-                String[] temp =s.split(" ");
+            DefaultListModel<String> news =((User) u).getNewsfeed();
+            for (Object s: news.toArray()){
+                String[] temp =((String) s).split(" ");
                 for (String t:temp){
                     words.add(t.toLowerCase());
                 }
