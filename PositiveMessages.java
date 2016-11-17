@@ -1,4 +1,4 @@
-import java.util.ArrayList; 
+import java.util.ArrayList;
 /**
  * This class uses the Visitor programming type to define a method to go
  * through user's messages and count the number of positive messages
@@ -58,7 +58,13 @@ public class PositiveMessages implements Visitor {
      *  get the percentage 
      */
     public double getPercent(){
-        return numPositive*100/numWords;
+        if(numWords>0){
+            return numPositive*100/numWords;
+        }
+        popUpWindow p = new popUpWindow();
+        
+        p.infoBox("Can't get Percentage", "Error");
+        return 0;
     }
     
 }

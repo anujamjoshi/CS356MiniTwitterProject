@@ -311,38 +311,36 @@ public class AdminControlPanelWindow extends JFrame implements AdminPanel{
                 OpenUserView(selectedNode);
             }
             else{
+                popUpWindow p = new popUpWindow();
                 if (e.getSource()==AdminControlPanelWindow.getInstance().getSeeNumGroup()){
                     NumUsers numUser= new NumUsers();
                     treeImplementation.invite(numUser);
-                    popUpWindow("there are" + numUser.getCount() + "Groups" );
+                    p.infoBox( numUser.getCount() , "Number of Groups");
                     
                 }
                 else if (e.getSource()==AdminControlPanelWindow.getInstance().getSeeNumMessage()){
                     
                     Messages messages= new Messages();
                     treeImplementation.invite(messages);
-                    popUpWindow("there are" + messages.getNumMessages() + "Messages" );
+                    p.infoBox(messages.getNumMessages(), "Number of Messages" );
                     
                 }
                 else if (e.getSource()==AdminControlPanelWindow.getInstance().getSeeNumUser()){
                     NumUsers userCount= new NumUsers();
                     treeImplementation.invite(userCount);
-                    popUpWindow("there are" + userCount.getCount() + "Users" );
+                    p.infoBox(userCount.getCount(), "Number of Users" );
                     
                 }
                 else if (e.getSource()==AdminControlPanelWindow.getInstance().getSeePercentage()){
                     PositiveMessages words= new PositiveMessages();
                     treeImplementation.invite(words);
-                    popUpWindow("there are" + words.getPercent() + "Percent of Positive Words" );
+                    p.infoBox(words.getPercent(),"Percent of Positive Words" );
                 }
             }
             
         }
         
-        private void popUpWindow(String string) {
-            // TODO Auto-generated method stub
-            
-        }
+        
         
     }
 }
