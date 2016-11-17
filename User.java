@@ -33,9 +33,7 @@ public class User extends TwitterUser implements Observer, Subject {
             System.out.println("already in group, can't add another group");
         }
     }
-    public UserGroup getGroup(){
-        return group;
-    }
+    
     /**
      * tweet the message that @this is posting
      */
@@ -130,9 +128,9 @@ public class User extends TwitterUser implements Observer, Subject {
          */
         if(updatedFeed){
             updatedFeed=false;
-            for (Object o: following.toArray()){
+            for (Object o: followers.toArray()){
                 // for each observer get the message to update and add it to the respective newsfeed. 
-                update((Subject) o);
+                this.update((Subject) o);
             }
             
         }
